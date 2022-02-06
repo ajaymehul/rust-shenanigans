@@ -224,6 +224,8 @@ This is really nice.
 
 I tried utlizing the `break` return functionality to by creating a `loop` as the return statement. So that `loop` is the return expression, and what the `break` returns ends up bubbling out of the entire function's return. Some edgy syntax, nice!!
 
+Alright, apparently there'something called 'ownership' that's unique to Rust. That's what's up. Let's take a break & have some dinner, and then we'll get back to it.
+
 
 
 
