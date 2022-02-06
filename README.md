@@ -1,7 +1,7 @@
 # Rust Shenanigans
 
 I'm just gonna use this space to journal my rust learning journey. 
-I'm going to use the offical book ([The Book]((https://doc.rust-lang.org/book))) from Rust 
+I'm going to use the offical book ([The Book](https://doc.rust-lang.org/book)) from Rust 
 It's been a while since I've picked up any programming language. My work, projects, etc., have all just been javascript/python. 
 
 Now there's this hot new programming language called Rust. Memory? I have a vague memory of it since my college C programming days. I miss memory management. I remember the discomfort of not knowing what's happening behind the scenes in js or python. I'm excited to get back down to low-level stuff with Rust. This shall be fun. 
@@ -9,8 +9,9 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
 ## Table of Contents
 - [Rust Shenanigans](#rust-shenanigans)
   - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [hello-rust](#hello-rust)
+  - [Chapter 1 - Getting Started](#chapter-1---getting-started)
+    - [Installation](#installation)
+    - [hello-rust](#hello-rust)
   - [Chapter 2](#chapter-2)
     - [guessing_game](#guessing_game)
   - [Chapter 3 - Basics](#chapter-3---basics)
@@ -33,7 +34,10 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
       - [Notes](#notes)
       - [fibonacci exercise](#fibonacci-exercise)
 
-## Installation
+
+
+## Chapter 1 - Getting Started
+### Installation
 
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -41,7 +45,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 Well that was easy!
 
-## hello-rust
+### hello-rust
 
 That's a cute crab. Terminal text art is always awesome!!
 ```
@@ -224,7 +228,7 @@ This is really nice.
 
 I tried utlizing the `break` return functionality to by creating a `loop` as the return statement. So that `loop` is the return expression, and what the `break` returns ends up bubbling out of the entire function's return. Some edgy syntax, nice!!
 
-Alright, apparently there'something called 'ownership' that's unique to Rust. That's what's up. Let's take a break & have some dinner, and then we'll get back to it.
+Alright, apparently there'something called 'ownership' that's unique to Rust. That's what's up. Let's take a break & have some dinner, and then we'll get back to it.g
 
 
 
