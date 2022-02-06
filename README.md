@@ -31,6 +31,7 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
       - [for in a collection](#for-in-a-collection)
       - [traditional for loop](#traditional-for-loop)
       - [Notes](#notes)
+      - [fibonacci exercise](#fibonacci-exercise)
 
 ## Installation
 
@@ -218,6 +219,10 @@ let result = loop {
 }
 ```
 This is really nice.
+
+#### fibonacci exercise
+
+I tried utlizing the `break` return functionality to by creating a `loop` as the return statement. So that `loop` is the return expression, and what the `break` returns ends up bubbling out of the entire function's return. Some edgy syntax, nice!!
 
 
 
