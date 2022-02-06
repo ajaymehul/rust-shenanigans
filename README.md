@@ -37,6 +37,10 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
   - [Chapter 4 - Ownership](#chapter-4---ownership)
     - [String Type](#string-type)
     - [Ownership & Functions](#ownership--functions)
+    - [References](#references)
+    - [Mutable Reference](#mutable-reference)
+      - [Note on scope of references](#note-on-scope-of-references)
+      - [Rules](#rules)
 
 
 
@@ -286,6 +290,49 @@ fn takes_ownership(some_string: String) { // some_string comes into scope
 ```
 
 Wow, my prediction was correct. You can give an take back ownership by passing it to functions, and capturing their return values. I guess I have half-decent programming intuition. 
+
+Scratch that, we are now onto `references` because passing and receiving ownership like that would be tedious. So Rust has implemented some features to help with this. 
+
+### References
+Instead passing ownership to a function, you can pass a reference that the function can use to access the memory without taking ownership. 
+Syntax:
+```
+fn main() {
+    let s1 = String::from("hello");
+    let len = calculate_length(&s1);
+    println!("The length of '{}' is {}.", s1, len);
+}
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+Nice.
+
+> You can also dereference with `*`. Okay, so it's just C pointers, except I just have to be aware that when whatever variable has the ownership goes out of scope, it'll have `free()` called on it. 
+
+### Mutable Reference
+
+If you want to mutate the variable while borrowing it, you'll need the variable to be mutable, and reference be mutable. 
+
+- only one mutable reference at any given time.
+
+#### Note on scope of references
+```
+let mut s = String::from("hello");
+
+let r1 = &s; // no problem
+let r2 = &s; // no problem
+println!("{} and {}", r1, r2);
+// variables r1 and r2 will not be used after this point
+let r3 = &mut s; // no problem
+println!("{}", r3);
+```
+This is valid code because r1, r2 is not used after println!. So it's considered out of scope. I didn't expect this. This is called: Non-Lexical Lifetimes. I should read up on this. 
+
+#### Rules
+
+- At any given time, you can have either one mutable reference or any number of immutable references.
+- References must always be valid.
 
 
 
