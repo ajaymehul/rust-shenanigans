@@ -22,6 +22,15 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
     - [Functions](#functions)
       - [Expressions](#expressions)
       - [Function returning values](#function-returning-values)
+    - [Comments](#comments)
+    - [Control Flow](#control-flow)
+      - [if-else statement syntax:](#if-else-statement-syntax)
+      - [bind variable to if-else returning expression](#bind-variable-to-if-else-returning-expression)
+      - [infinite loop](#infinite-loop)
+      - [while](#while)
+      - [for in a collection](#for-in-a-collection)
+      - [traditional for loop](#traditional-for-loop)
+      - [Notes](#notes)
 
 ## Installation
 
@@ -140,6 +149,76 @@ fn five() -> i32 {
     5
 }
 ```
+
+### Comments
+```
+// This is a single line comment
+
+// This is a multiline comment. 
+// Heh. With VSCode ⌘ + /, we'll be fine.
+```
+
+### Control Flow
+#### if-else statement syntax:
+```
+let number: i32 = 5;
+
+if number < 5 {
+    println!("{} number is less than 5", number);
+} else {
+    println!("{} number is not less than 5", number);
+}
+```
+> Note using `()` for if condition throws a warning. Rust doesn't require outermost parantheses
+
+#### bind variable to if-else returning expression
+```
+fn main() {
+    let condition = true;
+    let number = if condition { 5 } else { 6 };
+
+    println!("The value of number is: {}", number);
+}
+```
+#### infinite loop
+```
+loop {
+    println!("I will go on forever!"); //until break;
+}
+```
+#### while
+```
+while number != 0 {
+    println!("{}!", number);
+    number -= 1;
+}
+```
+#### for in a collection
+```
+let a = [10, 20, 30, 40, 50];
+for element in a {
+    println!("the value is: {}", element);
+}
+```
+#### traditional for loop
+```
+for number in (1..4).rev() {
+    //do whatever. Not inclusive of 4
+}
+```
+#### Notes
+
+Most of the control flow stuff was pretty standard. One interesting thing is you can use the `break` to return stuff to variables. For example this is valid syntax:
+```
+let result = loop {
+    // repeatedly do something
+    if <condition> {
+        break <some-return-expression>;
+    }
+}
+```
+This is really nice.
+
 
 
 
