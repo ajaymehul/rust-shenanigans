@@ -6,6 +6,23 @@ It's been a while since I've picked up any programming language. My work, projec
 
 Now there's this hot new programming language called Rust. Memory? I have a vague memory of it since my college C programming days. I miss memory management. I remember the discomfort of not knowing what's happening behind the scenes in js or python. I'm excited to get back down to low-level stuff with Rust. This shall be fun. 
 
+## Table of Contents
+- [Rust Shenanigans](#rust-shenanigans)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [hello-rust](#hello-rust)
+  - [Chapter 2](#chapter-2)
+    - [guessing_game](#guessing_game)
+  - [Chapter 3 - Basics](#chapter-3---basics)
+    - [Variables](#variables)
+    - [Data Types](#data-types)
+    - [Compound Types](#compound-types)
+      - [Tuples](#tuples)
+      - [Arrays](#arrays)
+    - [Functions](#functions)
+      - [Expressions](#expressions)
+      - [Function returning values](#function-returning-values)
+
 ## Installation
 
 ```
