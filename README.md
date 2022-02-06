@@ -98,7 +98,31 @@ fn another_function () {
 }
 ```
 
+- Function parameters must have explicit types. No inference here. 
 
+#### Expressions
+```
+fn main() {
+    let y = {
+        let x = 3;
+        x + 1
+    };
+
+    println!("The value of y is: {}", y);
+}
+```
+- `y` above is binded to an expression.
+- expressions do not end with an `;`
+
+#### Function returning values
+If you don't specify any expression to return, by default functions return `()`, an empty tuple or `unit type`. 
+
+You specify the return type and return something with the following syntax:
+```
+fn five() -> i32 {
+    5
+}
+```
 
 
 
