@@ -4,7 +4,7 @@ I'm just gonna use this space to journal my rust learning journey.
 I'm going to use the offical book ([The Book]((https://doc.rust-lang.org/book))) from Rust 
 It's been a while since I've picked up any programming language. My work, projects, etc., have all just been javascript/python. 
 
-Now there's this hot new programming language called Rust. Memory? I have a vague memory of it since my college C programming days. I miss memory management. I remember the discomfort of not knowing what the hell is happening behind the scenes when I learned js or python. I'm excited to get back down to low-level stuff with Rust. This shall be fun. 
+Now there's this hot new programming language called Rust. Memory? I have a vague memory of it since my college C programming days. I miss memory management. I remember the discomfort of not knowing what's happening behind the scenes in js or python. I'm excited to get back down to low-level stuff with Rust. This shall be fun. 
 
 ## Installation
 
@@ -91,6 +91,12 @@ let a = [3; 5]; //repeat same value: [3; 5] = [3,3,3,3,3]
 
 ### Functions
 
+Syntax:
+```
+fn another_function () {
+  println!("Another function.");
+}
+```
 
 
 
