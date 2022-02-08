@@ -41,13 +41,17 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
     - [Mutable Reference](#mutable-reference)
       - [Note on scope of references](#note-on-scope-of-references)
       - [Rules](#rules)
+    - [Slices](#slices)
+      - [Substring](#substring)
+      - [General subarray](#general-subarray)
+      - [Mutable Slice](#mutable-slice)
 
 
 
 ## Chapter 1 - Getting Started
 ### Installation
 
-```
+```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
@@ -56,7 +60,7 @@ Well that was easy!
 ### hello-rust
 
 That's a cute crab. Terminal text art is always awesome!!
-```
+```rust
 < Hello fellow Rustacenas! >
  --------------------------
         \
@@ -88,7 +92,7 @@ Ferris, Strength & Honor!
 - `let` to create variables. Variables are immutable by default. I like this. 
 - `mut` preceding the variable name makes it mutable. 
 - `const` for constants. Immutable as well. But can't edit mutability with `mut`. Naming convention: `screaming snake case`. eg:
-```
+```rust
 const I_CANNNOT_CHANGE: u32 = 2 * 4;
 ```
 - stuff that can be assigned to `const` and operations that can be done before binding to constant at compile time: https://doc.rust-lang.org/reference/const_eval.html
@@ -96,7 +100,7 @@ const I_CANNNOT_CHANGE: u32 = 2 * 4;
 
 ### Data Types
 Usage:
-```
+```rust
 let <varname>: <type> = <whatever-we-wanna-bind>;
 ```
 
@@ -111,7 +115,7 @@ let <varname>: <type> = <whatever-we-wanna-bind>;
 ### Compound Types
 
 #### Tuples
-```
+```rust
 let tup: (i32, f64, u8) = (500, 6.4, 1);
 ```
 - can be access by destructuring `let (x,y,z) = tup;`
@@ -122,7 +126,7 @@ let tup: (i32, f64, u8) = (500, 6.4, 1);
 Fixed length arrays! Ooh brings back C memories. Ah, building my own resizable array data structure with ammortized O(1) inserts for CS 101. Dr. Brandon Dixon taught that class at 8:00 am while sipping on orange sunkist. Of course, rust gives us `vectors` too, so irrelavant.
 
 Syntax:
-```
+```rust
 let a = [1,2,3,4,5];
 let a: [i32; 5] = [1,2,3,4,5]; //type & size explicit
 let a = [3; 5]; //repeat same value: [3; 5] = [3,3,3,3,3]
@@ -131,7 +135,7 @@ let a = [3; 5]; //repeat same value: [3; 5] = [3,3,3,3,3]
 ### Functions
 
 Syntax:
-```
+```rust
 fn another_function () {
   println!("Another function.");
 }
@@ -140,7 +144,7 @@ fn another_function () {
 - Function parameters must have explicit types. No inference here. 
 
 #### Expressions
-```
+```rust
 fn main() {
     let y = {
         let x = 3;
@@ -157,14 +161,14 @@ fn main() {
 If you don't specify any expression to return, by default functions return `()`, an empty tuple or `unit type`. 
 
 You specify the return type and return something with the following syntax:
-```
+```rust
 fn five() -> i32 {
     5
 }
 ```
 
 ### Comments
-```
+```rust
 // This is a single line comment
 
 // This is a multiline comment. 
@@ -173,7 +177,7 @@ fn five() -> i32 {
 
 ### Control Flow
 #### if-else statement syntax:
-```
+```rust
 let number: i32 = 5;
 
 if number < 5 {
@@ -185,7 +189,7 @@ if number < 5 {
 > Note using `()` for if condition throws a warning. Rust doesn't require outermost parantheses
 
 #### bind variable to if-else returning expression
-```
+```rust
 fn main() {
     let condition = true;
     let number = if condition { 5 } else { 6 };
@@ -194,27 +198,27 @@ fn main() {
 }
 ```
 #### infinite loop
-```
+```rust
 loop {
     println!("I will go on forever!"); //until break;
 }
 ```
 #### while
-```
+```rust
 while number != 0 {
     println!("{}!", number);
     number -= 1;
 }
 ```
 #### for in a collection
-```
+```rust
 let a = [10, 20, 30, 40, 50];
 for element in a {
     println!("the value is: {}", element);
 }
 ```
 #### traditional for loop
-```
+```rust
 for number in (1..4).rev() {
     //do whatever. Not inclusive of 4
 }
@@ -222,7 +226,7 @@ for number in (1..4).rev() {
 #### Notes
 
 Most of the control flow stuff was pretty standard. One interesting thing is you can use the `break` to return stuff to variables. For example this is valid syntax:
-```
+```rust
 let result = loop {
     // repeatedly do something
     if <condition> {
@@ -253,7 +257,7 @@ Rules:
 - In String type, the `from` method is doing the allocation. Once the heap allocated variable goes out of scope, some `drop` function is automatically called for us. Nice. 
 
 
-```
+```rust
 let s1 = String::from("hello");
 let s2 = s1
 ```
@@ -271,14 +275,14 @@ So changing `s2` will change `s1` too. Makes sense, `s1`,`s2` both reference the
 >**virtūs et honos**!
 
 - deepcopy: 
-  ```
+  ```rust
     let s1 = String::from("hello");
     let s2 = s1.clone();
   ```
 - Rust has a `Copy` trait that we can annotate to types to allow stack copy operations. But the compiler won't let us use it if it has the `drop` method implemented.
 
 ### Ownership & Functions
-```
+```rust
 fn main() {
     let s = String::from("hello");  // s comes into scope
     takes_ownership(s);
@@ -296,7 +300,7 @@ Scratch that, we are now onto `references` because passing and receiving ownersh
 ### References
 Instead passing ownership to a function, you can pass a reference that the function can use to access the memory without taking ownership. 
 Syntax:
-```
+```rust
 fn main() {
     let s1 = String::from("hello");
     let len = calculate_length(&s1);
@@ -317,7 +321,7 @@ If you want to mutate the variable while borrowing it, you'll need the variable 
 - only one mutable reference at any given time.
 
 #### Note on scope of references
-```
+```rust
 let mut s = String::from("hello");
 
 let r1 = &s; // no problem
@@ -334,6 +338,28 @@ This is valid code because r1, r2 is not used after println!. So it's considered
 - At any given time, you can have either one mutable reference or any number of immutable references.
 - References must always be valid.
 
+### Slices
+
+Slices are an borrowed reference to a subset of memory of another variable. 
+#### Substring
+```rust
+let s: String = String::from("Hahaha Helloo");
+let sub_string: &str = &s[0...2]; //[starting-index ... ending-index-minus-1]
+```
+
+#### General subarray
+```rust
+let arr: [u32; 10] = [10,20,30,40,50,60,70,80,90,100];
+let sub_arr = &arr[0..5]; //0 to 4
+let sub_arr_2 = &arr[..] //whole
+```
+
+#### Mutable Slice
+```rust
+let mut array_mut: [u32; 8] = [10,20,30,40,50,60,70,80];
+let sub_array_mut = &mut array_mut[0..5];
+sub_array_mut[2] = 100;
+```
 
 
 
