@@ -52,6 +52,11 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
   - [Chapter 6 - enums](#chapter-6---enums)
       - [Syntax](#syntax)
     - [Option enum](#option-enum)
+    - [match](#match)
+      - [Syntax](#syntax-1)
+      - [Enum variant with data](#enum-variant-with-data)
+      - [catch-all](#catch-all)
+    - [if-let](#if-let)
 
 
 
@@ -495,8 +500,66 @@ let absent_number: Option<u32> = None;
 AHH, the book says we'll use `Options` by using `match`. This `match` is going to be so cool when we get there. 
 
 
+### match
 
+Lol, it was literally the next page. Yay!!
 
+#### Syntax
+```rust
+
+match coin {
+  Coin::Penny => 1,
+  Coin::Nickel => 5,
+  Coin::Dime => 10,
+  Coin::Quarter => 25
+}
+```
+#### Enum variant with data
+If the enum variant had data associated with it:
+```rust
+//snip
+  Coin::Quarter(data) => {
+      //do stuff with data
+      25
+    }
+```
+
+#### catch-all
+All the different possible variants of an enum must be handled in match. 
+Example for catch-all:
+```rust
+//snip
+  other => // do whatever
+```
+If we didn't want to use the data:
+```rust
+//snip
+  _ => // handle all other arms
+```
+
+### if-let
+
+This is essentially just match with two arms: one variant of enum , all other variants.
+
+This code:
+```rust
+let config_max = Some(3u8);
+    match config_max {
+        Some(max) => println!("The maximum is configured to be {}", max),
+        _ => (),
+    }
+```
+becomes:
+```rust
+let config_max = Some(3u8);
+    if let Some(max) = config_max {
+        println!("The maximum is configured to be {}", max);
+}
+```
+
+You can also use `else` after the `if` block to handle all other cases instead of ignoring it. 
+
+Nice stuff so far!!!
 
 
 
