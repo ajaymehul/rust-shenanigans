@@ -49,6 +49,9 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
     - [Definition](#definition)
     - [Defining methods](#defining-methods)
       - [Associated functions](#associated-functions)
+  - [Chapter 6 - enums](#chapter-6---enums)
+      - [Syntax](#syntax)
+    - [Option enum](#option-enum)
 
 
 
@@ -436,6 +439,60 @@ impl Rect{
 }
 ```
 
+## Chapter 6 - enums
+
+#### Syntax 
+```rust
+enum IpAddrKind {
+    V4,
+    V6,
+}
+```
+
+Enums with data encoded:
+```rust
+enum IpAddr {
+    V4(String), 
+    V6(String)
+}
+```
+
+Enums with different types of data:
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+```
+Quit has no data, Move is like a struct, Write has a String, ChangeColor is a tuple with scalars. 
+
+You can also `impl` for enums. I'm not sure how the implmented functions are supposed to handle the different types of data associated with enums. 
+Maybe that `match` will come into play, we'll see. 
+
+### Option enum
+
+Supposed to be replacement for `null`. `Option` can either have `None` variant (this is not `null`, just a simple enum variant, but serves like `null`. I suppose even `null` might be just a simple implementation. Gotta find out. ), or a `generic type` (more on this later). 
+
+Standard Library Definition:
+```rust
+enum Option<T> {
+    None,
+    Some(T),
+}
+```
+
+Usage:
+```rust
+let num = Some(5);
+let string = Some("a word");
+
+let absent_number: Option<u32> = None;
+```
+
+
+AHH, the book says we'll use `Options` by using `match`. This `match` is going to be so cool when we get there. 
 
 
 
