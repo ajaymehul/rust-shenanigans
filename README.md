@@ -45,6 +45,10 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
       - [Substring](#substring)
       - [General subarray](#general-subarray)
       - [Mutable Slice](#mutable-slice)
+  - [Chapter 5 - Structs](#chapter-5---structs)
+    - [Definition](#definition)
+    - [Defining methods](#defining-methods)
+      - [Associated functions](#associated-functions)
 
 
 
@@ -360,6 +364,80 @@ let mut array_mut: [u32; 8] = [10,20,30,40,50,60,70,80];
 let sub_array_mut = &mut array_mut[0..5];
 sub_array_mut[2] = 100;
 ```
+
+## Chapter 5 - Structs
+
+### Definition
+```rust
+struct User { // 1
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64
+}
+
+struct Color(u32, u32, u32) //2
+struct Point(u32, u32, u32) //2
+
+struct UnitLikeStruct; //3
+```
+
+- 1: Struct with data. We had to use `String` instead of slice `&str` because we need the data inside structs to be alive as long as the struct. So struct owner should own the data inside. To use references inside struct, we need to learn lifetimes later
+- 2: Tuple Struct. Both `Color` and `Point` have the the same data schema. But are considered different types. Used like any other tuple. 
+- 3: Unit-like struct. Struct with no data. It can be used to defined behavioe. We'll learn later. 
+
+Bad:
+```rust
+let mut user2 = User {
+  email: String::from("bobby_new@rust.com"),
+  ..user
+};
+user.username = String::from("Bobbie-new"); // error
+// because ownership went to user2
+user.email = String:from("bobbdy_user@rust.com"); //valid
+// because new String was created when user2 was created. So user still owns user.email. 
+user.active = false; //valid
+// because bool has Copy trait, so it was copied. Not ownership transfered like email. Stack data. 
+```
+
+### Defining methods
+[Docs](https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html)
+
+```rust
+#[derive(Debug)]
+struct Rect {
+    width: u32,
+    height: u32
+}
+
+impl Rect {
+    fn area(&self) -> u32{
+        self.width * self.height
+    }
+}
+```
+
+`impl` short for implementation allows one to implement methods. Methods take in a `self` which can be mutable or not mutable. It's usually **borrowed** instead of ownership transferred unless you'd want to transform it into something else and return a new object. 
+
+#### Associated functions
+
+This explains the `String::from("blah")` syntax. 
+These and implementations of the struct, that don't take in a `self` and return an object of type the `impl` is associated with. Useful for stuff like constructors. 
+
+Example for `Rect` from above:
+```rust
+impl Rect{
+    fn square(size: u32) -> Rect {
+        Rect {
+            height: size,
+            width: size
+        }
+    }
+}
+```
+
+
+
 
 
 
