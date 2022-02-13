@@ -57,6 +57,9 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
       - [Enum variant with data](#enum-variant-with-data)
       - [catch-all](#catch-all)
     - [if-let](#if-let)
+  - [Chapter 7 - Packages](#chapter-7---packages)
+  - [Chapter 8 - Common Collections](#chapter-8---common-collections)
+    - [Vectors](#vectors)
 
 
 
@@ -561,6 +564,37 @@ You can also use `else` after the `if` block to handle all other cases instead o
 
 Nice stuff so far!!!
 
+## Chapter 7 - Packages
+
+I read through this whole chapter and worked out the examples. I highly doubt I'll remember this clearly. I'll just pick it up when I start coding bigger projects and start reading other packages. Until then, I'll just drop a link to the chapter below:
+
+
+https://doc.rust-lang.org/stable/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html
+
+
+## Chapter 8 - Common Collections
+
+### Vectors
+
+- Usual vectors. Created using `vec![1,2,3]`
+- Mutable Vector:
+  ```rust
+  let mut v = Vec::new();
+  v.push(5);
+  ```
+- Returns an Option<T> so that we can handle stuff without errors using `match`
+
+Two ways to pull data out of vectors:
+```rust
+let v = vec![1, 2, 3, 4, 5]
+let third: &i32 = &v[2];
+println!("The third element is {}", third)
+match v.get(2) {
+    Some(third) => println!("The third element is {}", third),
+    None => println!("There is no third element."),
+}
+
+```
 
 
 
