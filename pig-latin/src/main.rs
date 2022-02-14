@@ -1,3 +1,5 @@
+
+
 fn main() {
     let words = vec!["First", "Second", "Alphabet"];
     for word in &words {
@@ -7,24 +9,34 @@ fn main() {
 }
 
 
+
+
 fn convert_to_pig_latin(s: &str) -> String {
     let s = String::from(s); //shadowing woo
     let mut pig_latin = String::new();
 
 
-    let mut ignore_flag = 0; // don't push into pig_latin while this is 0
-    let mut first_char = ' '; //temporary. This is bad code, but rust is hard
+    let mut first_flag = 0; // first char flag when 0
+    let mut first_char = None; //temporary. This is bad code, but rust is hard
     for c in s.chars() {
-        if ignore_flag == 0 {
-            ignore_flag = 1;
-            first_char = c;
+        if first_flag == 0 {
+            first_flag = 1;
+            if ['a','e','i','o','u','A','E', 'I','O','U'].contains(&c){
+                pig_latin.push(c);
+            } else {
+                first_char = Some(c);
+            }
+            
         }
         else {
             pig_latin.push(c);
         }
     }
     pig_latin.push('-');
-    pig_latin.push(first_char);
+    match first_char {
+        Some(c) => {pig_latin.push(c);}
+        None => {}
+    }
     pig_latin.push_str("ay");
 
     return pig_latin
