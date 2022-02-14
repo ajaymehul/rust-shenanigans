@@ -1,5 +1,3 @@
-
-
 fn main() {
     let words = vec!["First", "Second", "Alphabet"];
     for word in &words {
