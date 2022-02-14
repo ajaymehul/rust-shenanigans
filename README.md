@@ -63,6 +63,7 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
     - [Timeout](#timeout)
     - [Strings](#strings)
     - [Hash Maps](#hash-maps)
+    - [Excercises](#excercises)
 
 
 
@@ -655,6 +656,10 @@ let mut scores = HashMap::new();
 scores.insert(String::from("Blue"), 10);
 scores.insert(String::from("Yellow"), 50);
 ```
+
+### Excercises
+
+These excercises were hard to do. I guess I haven't really written much rust code by myself. It was good excercise and I feel much more comfortable. I had to perform all the error handling using Enums in my employee CLI project. Played for a nice segue into error handling next. 
 
 
 
