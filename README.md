@@ -60,6 +60,9 @@ Now there's this hot new programming language called Rust. Memory? I have a vagu
   - [Chapter 7 - Packages](#chapter-7---packages)
   - [Chapter 8 - Common Collections](#chapter-8---common-collections)
     - [Vectors](#vectors)
+    - [Timeout](#timeout)
+    - [Strings](#strings)
+    - [Hash Maps](#hash-maps)
 
 
 
@@ -594,6 +597,63 @@ match v.get(2) {
     None => println!("There is no third element."),
 }
 
+```
+
+### Timeout 
+
+Yeah, I really need to start building something with rust. This is getting a little dry. But push on ... virtūs et honos
+
+### Strings
+
+New String:
+```rust
+let mut s = String::new();
+```
+
+Ways to populate that new string:
+```rust
+let data = "initial contents";
+let s = data.to_string();
+let s = "initial contents".to_string();
+```
+
+Append:
+```rust
+s.push_str("weeee");
+```
+
+These note-taking seem a little pointless. This `+` operator has some weird behavior because of its implementation. You'll lose ownership. Just remember this. Come back to this page if you have issue with Strings. The docs are great though. 
+
+format seems important and useful:
+```rust
+let s1 = String::from("tic");
+let s2 = String::from("tac");
+let s3 = String::from("toe");
+let s = format!("{}-{}-{}", s1, s2, s3);
+```
+
+Accessing chars:
+`let h = s1[0];` this is very bad. UTF-8 makes it all different sizes. So never do this. 
+
+Indexing into strings is not O(1) because it's all variable sizes. Rust needs to read the whole string to understand how many characters (`grapheme` clusters technically).
+
+Grapheme is supposedly what'd we see as one character.
+
+Iterating through chars:
+```rust
+for c in "नमस्ते".chars() {
+    println!("{}", c);
+}
+```
+
+### Hash Maps
+
+Syntax:
+```rust
+use std::collections::HashMap;
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
 ```
 
 
