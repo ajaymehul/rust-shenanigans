@@ -35,7 +35,7 @@ fn convert_to_pig_latin(s: &str) -> String {
     pig_latin.push('-');
     match first_char {
         Some(c) => {pig_latin.push(c);}
-        None => {}
+        None => {pig_latin.push('h')}
     }
     pig_latin.push_str("ay");
 
